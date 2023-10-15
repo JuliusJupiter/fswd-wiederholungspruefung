@@ -8,11 +8,30 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///todos.sqlite'
 db = SQLAlchemy()
 db.init_app(app)
 
+
+class User(db.Model):
+    id = db.Column(db.Integer, primary_Key=True, autoincrement=True)
+    username = db.Column(db.String, nullable=False, unique=True)
+    password = db.Column(db.String, nullable=False)
+    todo = db.relationship('Todo', backref='user', cascade='all, delete-orphan')
+
+    def __init__(self, username, password):
+        self.username = username
+        self.password = password
+
+    def is_active(self):
+        return True    
+    
+    def get_id(self):
+        return str(self.id)
+
 class Todo(db.Model):
     id = db.Column(db.Integer, primary_key=True, index=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete='CASCADE'))
     complete = db.Column(db.Boolean, default=False)
     description = db.Column(db.String, nullable=False)
     lists = db.relationship('List', secondary='todo_list', back_populates='todos')
+
 
     def populate_lists(self, list_ids):
         lists = []
