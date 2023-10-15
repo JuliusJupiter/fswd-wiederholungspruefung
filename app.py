@@ -1,6 +1,7 @@
 from flask import Flask, render_template, redirect, url_for, request, abort, flash
 from flask_bootstrap import Bootstrap5
-from flask_login import LoginManager
+from flask_login import LoginManager, login_user, logout_user, login_required, current_user
+from werkzeug.security import check_password_hash, generate_password_hash
 import forms
 
 app = Flask(__name__)
@@ -19,10 +20,24 @@ bootstrap = Bootstrap5(app)
 def load_user(user_id):
     return db.User.get(user_id)
 
+
 @app.route('/index')
 @app.route('/')
 def index():
     return redirect(url_for('todos'))
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    form = forms.LoginForm()
+    if request.method == 'POST':
+        if form.validate():
+            user = db.User.query.filter_by(username=form.username.data).first()
+            if user and check_password_hash(user.password, form.password.data):    
+                login_user(user)
+                return redirect(url_for('todos'))
+            flash('wrong password', 'warnung')
+    else:
+        return render_template('login.html', form = form)
 
 @app.route('/todos/', methods=['GET', 'POST'])
 def todos():
