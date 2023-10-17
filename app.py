@@ -38,6 +38,24 @@ def login():
             flash('wrong password', 'warnung')
     else:
         return render_template('login.html', form = form)
+    
+@app.route('/register', methods=['GET','POST'])
+def register():
+    form = forms.RegisterForm()
+    if request.method == 'POST':
+        if form.validate():
+            name = form.nutzername.data
+            if db.User.query.filter_by(username=name).first():
+                flash('Username already exists. Please choose another.', 'danger')
+                return redirect(url_for('register'))
+            hashed_password = generate_password_hash(form.password.data)
+            user = db.User(username='name', password=hashed_password)    
+            db.session.add(user)
+            db.session.commit()
+            login_user(user)
+            return redirect(url_for('todos'))
+    else:
+        return render_template('register.html', form = form)    
 
 @app.route('/todos/', methods=['GET', 'POST'])
 def todos():
