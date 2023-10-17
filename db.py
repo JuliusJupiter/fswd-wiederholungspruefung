@@ -10,7 +10,7 @@ db.init_app(app)
 
 
 class User(db.Model):
-    id = db.Column(db.Integer, primary_Key=True, autoincrement=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     username = db.Column(db.String, nullable=False, unique=True)
     password = db.Column(db.String, nullable=False)
     todo = db.relationship('Todo', backref='user', cascade='all, delete-orphan')
