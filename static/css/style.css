@@ -4,6 +4,7 @@ body {
 	margin: 10px auto;
 	border: 2px solid #D50C2F;
 }
+
 a {
 	color: #35a;
 	text-decoration: none;
@@ -59,4 +60,12 @@ nav a {
 .content h2 {
 	font-size: large;
 	margin: 2px 0px;
+}
+
+.logout-btn {
+	background-color: #d9534f;
+	color: #fff;
+	padding: 5px 10px;
+	border: none;
+	cursor: pointer;
 }
