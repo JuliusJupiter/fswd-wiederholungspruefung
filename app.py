@@ -11,7 +11,7 @@ app.config.from_mapping(
     BOOTSTRAP_BOOTSWATCH_THEME = 'pulse'
 )
 
-from db import db, Todo, List, insert_sample  # (1.)
+from db import db, Todo, List, User, insert_sample   # (1.)
 
 login_manager = LoginManager()
 bootstrap = Bootstrap5(app)
@@ -20,18 +20,23 @@ bootstrap = Bootstrap5(app)
 def load_user(user_id):
     return db.User.get(user_id)
 
+@app.route("/logout")
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('login'))
 
 @app.route('/index')
 @app.route('/')
 def index():
-    return redirect(url_for('todos'))
+    return redirect(url_for('login'))
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     form = forms.LoginForm()
     if request.method == 'POST':
         if form.validate():
-            user = db.User.query.filter_by(username=form.username.data).first()
+            user = User.query.filter_by(username=form.username.data).first()
             if user and check_password_hash(user.password, form.password.data):    
                 login_user(user)
                 return redirect(url_for('todos'))
@@ -45,7 +50,7 @@ def register():
     if request.method == 'POST':
         if form.validate():
             name = form.nutzername.data
-            if db.User.query.filter_by(username=name).first():
+            if User.query.filter_by(username=name).first():
                 flash('Username already exists. Please choose another.', 'danger')
                 return redirect(url_for('register'))
             hashed_password = generate_password_hash(form.password.data)
@@ -57,11 +62,13 @@ def register():
     else:
         return render_template('register.html', form = form)    
 
+@login_required
 @app.route('/todos/', methods=['GET', 'POST'])
 def todos():
     form = forms.CreateTodoForm()
     if request.method == 'GET':
-        todos = db.session.execute(db.select(Todo).order_by(Todo.id)).scalars()  # !!
+        user_id = current_user().id
+        todos = Todo.query.filter_by(user_id=user_id).all()
         return render_template('todos.html', todos=todos, form=form)
     else:  # request.method == 'POST'
         if form.validate():
@@ -73,6 +80,7 @@ def todos():
             flash('No todo creation: validation error.', 'warning')
         return redirect(url_for('todos'))
 
+@login_required
 @app.route('/todos/<int:id>', methods=['GET', 'POST'])
 def todo(id):
     todo = db.session.get(Todo, id)  # !!
@@ -105,11 +113,13 @@ def todo(id):
             flash('Nothing happened.', 'info')
             return redirect(url_for('todo', id=id))
 
+@login_required
 @app.route('/lists/')
 def lists():
     lists = db.session.execute(db.select(List).order_by(List.name)).scalars()  # (6.)  # !!
     return render_template('lists.html', lists=lists)
 
+@login_required
 @app.route('/lists/<int:id>')
 def list(id):
     list = db.session.get(List, id)  # !!
