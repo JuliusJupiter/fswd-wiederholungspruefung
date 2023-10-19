@@ -2,6 +2,7 @@ import click
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import orm
 from app import app
+from werkzeug.security import generate_password_hash
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///todos.sqlite'
 
@@ -72,6 +73,10 @@ def insert_sample():
     db.session.execute(db.delete(todo_list))
     db.session.execute(db.delete(Todo))
     db.session.execute(db.delete(List)) 
+
+    # Create some users 
+    user1 = User(username='user1', password=generate_password_hash('password1'))
+    user2 = User(username='user2', password=generate_password_hash('password2'))
 
     # Create sample to-do items
     todo1 = Todo(complete=True, description='Get some food')
