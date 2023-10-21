@@ -28,6 +28,9 @@
                     {{ render_nav_item('todos', 'Todos') }}
                     {{ render_nav_item('lists', 'Lists') }}
                 </ul>
+                {% block LOGOUT_BUTTON %}
+                 <button class="btn btn-primary logout-btn" onclick="window.location.href='/logout'">Logout</button>
+                {% endblock %}
             </div>
         </div>
     </nav>
