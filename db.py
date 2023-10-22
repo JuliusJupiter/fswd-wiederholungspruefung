@@ -26,6 +26,9 @@ class User(db.Model):
     
     def get_id(self):
         return str(self.id)
+    
+    def is_authenticated(self):
+        return True
 
 class Todo(db.Model):
     id = db.Column(db.Integer, primary_key=True, index=True)
