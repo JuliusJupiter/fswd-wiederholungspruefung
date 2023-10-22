@@ -23,3 +23,6 @@ class TodoForm(FlaskForm):
     description = StringField(validators=[InputRequired()])
     list_id = SelectField(coerce=int, choices=[], validate_choice=False)
     submit = SubmitField('Update')
+
+class DeleteAccountForm(FlaskForm):
+    confirm_delete = SubmitField('confirm')    
