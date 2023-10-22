@@ -11,7 +11,7 @@ app.config.from_mapping(
     BOOTSTRAP_BOOTSWATCH_THEME = 'pulse'
 )
 
-from db import db, Todo, List, User, insert_sample   # (1.)
+from db import db, Todo, List, User, insert_sample  
 
 login_manager = LoginManager()
 bootstrap = Bootstrap5(app)
@@ -26,6 +26,22 @@ def load_user(user_id):
 def logout():
     logout_user()
     return redirect(url_for('login'))
+
+@app.route('/delete_user', methods=['GET', 'POST'])
+@login_required
+def delete_account():
+    form = DeleteAccountForm()
+
+    
+    if request.method == 'POST':
+        if form.validate_on_submit():    
+            db.session.delete(current_user)
+            db.session.commit()
+
+            flash('Account deleted.', 'success')
+            return redirect(url_for('logout')) 
+
+    return render_template('delete_user.html', form=form)
 
 @app.route('/index')
 @app.route('/')
