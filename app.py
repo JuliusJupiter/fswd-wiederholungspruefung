@@ -2,6 +2,8 @@ from flask import Flask, render_template, redirect, url_for, request, abort, fla
 from flask_bootstrap import Bootstrap5
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
 from werkzeug.security import check_password_hash, generate_password_hash
+from flask_restful import Api
+from api import TodoListResource, TodoResource
 import forms
 
 app = Flask(__name__)
@@ -11,7 +13,12 @@ app.config.from_mapping(
     BOOTSTRAP_BOOTSWATCH_THEME = 'pulse'
 )
 
+api = Api(app)
+api.add_resource(TodoListResource, '/api/todos')
+api.add_resource(TodoResource, '/api/todos/<int:todo_id>')
+
 from db import db, Todo, List, User, insert_sample  
+
 
 login_manager = LoginManager()
 bootstrap = Bootstrap5(app)
@@ -29,10 +36,9 @@ def logout():
 
 @app.route('/delete_user', methods=['GET', 'POST'])
 @login_required
-def delete_account():
-    form = DeleteAccountForm()
-
-    
+def delete_user():
+    form = forms.DeleteAccountForm()
+      
     if request.method == 'POST':
         if form.validate_on_submit():    
             db.session.delete(current_user)
