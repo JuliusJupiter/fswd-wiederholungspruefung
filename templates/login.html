@@ -9,21 +9,25 @@
 </head>
 
 <body>
+<div class="container w-50 mt-5">
 <h2>Login</h2>
 
-<form action="/login" method="post">
+<form action="/login" method="post" class="w-75 mx-auto">
     {{ form.hidden_tag() }}
-    <p>
-        {{ form.username.label }}<br>
-        {{ form.username(size=32) }}
-    </p>
-    <p>
-        {{ form.password.label }}<br>
-        {{ form.password(size=32) }}
-    </p>
-    <p>{{ form.submit() }}</p>
+        <div class="mb-3">
+            {{ form.username.label(class="form-label") }}<br>
+            {{ form.username(class="form-control") }}
+        </div>
+        <div class="mb-3">
+            {{ form.password.label(class="form-label") }}<br>
+            {{ form.password(class="form-control") }}
+        </div>
+        <button type="submit" class="btn btn-primary">Login</button>
 </form>
-<a href="/register">Registrieren</a>
+    <div class="text-center mt-3">
+        <a href="/register">Registrieren</a>
+    </div>
+</div>
 {{ bootstrap.load_js() }}
 </body>
 
