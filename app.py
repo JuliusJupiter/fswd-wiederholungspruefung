@@ -43,9 +43,9 @@ def delete_user():
         if form.validate_on_submit():    
             db.session.delete(current_user)
             db.session.commit()
-
+            logout_user()
             flash('Account deleted.', 'success')
-            return redirect(url_for('logout')) 
+            return redirect(url_for('register')) 
 
     return render_template('delete_user.html', form=form)
 
@@ -64,6 +64,7 @@ def login():
                 login_user(user)
                 return redirect(url_for('todos'))
             flash('wrong password', 'warnung')
+            return redirect(url_for('login'))
     else:
         return render_template('login.html', form = form)
     
