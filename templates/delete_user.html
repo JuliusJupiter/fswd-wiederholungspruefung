@@ -10,9 +10,6 @@
         {{ form.csrf_token }}
         {{ form.hidden_tag() }}
 
-        {% for field in form %}
-            {{ field }}
-        {% endfor %}
         
         <button type="submit" class="btn btn-danger">Bestätigen</button>
     </form>
