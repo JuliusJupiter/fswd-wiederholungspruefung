@@ -57,7 +57,7 @@ class TodoListResource(Resource):
         db.session.commit()
         return {'message': 'Todo created successfully'}, 201
 
-api.add_resource(TodoListResource, '/api/todos')
+api.add_resource(TodoListResource, '/api/todos/')
 api.add_resource(TodoResource, '/api/todos/<int:todo_id>')
 
 if __name__ == '__main__':

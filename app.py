@@ -14,7 +14,7 @@ app.config.from_mapping(
 )
 
 api = Api(app)
-api.add_resource(TodoListResource, '/api/todos')
+api.add_resource(TodoListResource, '/api/todos/')
 api.add_resource(TodoResource, '/api/todos/<int:todo_id>')
 
 from db import db, Todo, List, User, insert_sample  
@@ -44,7 +44,7 @@ def delete_user():
             db.session.delete(current_user)
             db.session.commit()
             logout_user()
-            flash('Account deleted.', 'success')
+            #flash('Account deleted.', 'success')
             return redirect(url_for('register')) 
 
     return render_template('delete_user.html', form=form)
