@@ -1,6 +1,8 @@
 # Contents of this repository
 
-it now contains the "Wiederholungsprüfung" of Julius Roberto Jupiter Jeske!
+it now contains the "Wiederholungsprüfung" of Julius Roberto Jupiter Jeske in the main branch! 
+As starting point, the ‘sqlalchemy’ branch of the repository was used.
+
 
 ## Steps to execute the code
 
