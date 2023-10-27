@@ -1,25 +1,8 @@
-<<<<<<< HEAD
-# fswd-examples
-
-Full-stack web development: code examples as additional resource to notebooks.
-
-First, fork this repository.
-
-> **Important**: make sure to **uncheck** the option *"copy the `main` branch only"*.
-
-Then select a particular branch and `pull` the resources from that branch to get access to code examples:
-
-+ [`intro`](https://github.com/hwrberlin/fswd-examples/tree/intro) contains example code from the "[Intro to full-stack web development with Flask](https://hwrberlin.github.io/fswd/02-fswd-intro.html)" session.
-+ [`flask`](https://github.com/hwrberlin/fswd-examples/tree/flask) contains example code from the "[Flask framework: URL path routing deep dive](https://hwrberlin.github.io/fswd/07-flask.html)" session.
-+ [`html+css`](https://github.com/hwrberlin/fswd-examples/tree/html+css) contains example code from the "[Introduction to HTML and CSS](https://hwrberlin.github.io/fswd/09-html-css.html)" session.
-+ [`ui`](https://github.com/hwrberlin/fswd-examples/tree/ui) contains example code from the "[User interfaces with WTForms and Bootstrap](https://hwrberlin.github.io/fswd/11-user-interfaces.html)" session.
-+ [`sqlalchemy`](https://github.com/hwrberlin/fswd-examples/tree/sqlalchemy) contains example code from the "[Relational databases with Flask-SQLAlchemy](https://hwrberlin.github.io/fswd/13-sqlalchemy.html)" session.
-=======
 # Contents of this repository
 
-You are on the **`sqlalchemy`** branch of this repository. It contains example code from the "[Relational databases with Flask-SQLAlchemy](https://hwrberlin.github.io/fswd/13-sqlalchemy.html)" session.
+it now contains the "Wiederholungsprüfung" of Julius Roberto Jupiter Jeske!
 
-## Steps to execute the example code
+## Steps to execute the code
 
 **Step 1:** set up and activate a [Python Virtual Environment](https://hwrberlin.github.io/fswd/01-python-vscode.html#32-use-the-python-virtual-environment-as-default-for-this-workspace).
 
@@ -50,7 +33,8 @@ Press CTRL+C to quit
  * Restarting with stat
 ```
 
-**Step 5:** visit <http://127.0.0.1:5000/insert/sample> to populate the app's database with some sample data.
+**Step 5:** visit <http://127.0.0.1:5000/insert/sample> to populate the app's database with some sample data. Alternatively you could 
+ create a new Account at: <http://127.0.0.1:5000/register> 
 
 **Step 6:** visit <http://127.0.0.1:5000/> to view the landing page.
->>>>>>> origin/sqlalchemy
+
