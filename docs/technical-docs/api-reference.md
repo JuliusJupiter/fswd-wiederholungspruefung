@@ -5,7 +5,7 @@ nav_order: 4
 ---
 
 
-# [API reference]
+# API reference
 {: .no_toc }
 
 <details open markdown="block">
@@ -17,7 +17,7 @@ nav_order: 4
 {:toc}
 </details>
 
-## [API]
+## API
 
 
 ### `def get(self, todo_id)`

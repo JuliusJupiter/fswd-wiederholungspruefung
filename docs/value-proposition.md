@@ -23,7 +23,6 @@ If you don´t want to use the service anymore just delete your account and all y
 ## Meet Nadine!
 ### Persona
 
-![Persona](../assets/images/personaNadine.png)
 ![Persona1](assets/images/personaNadine.png)
 
 
@@ -37,7 +36,7 @@ If you don´t want to use the service anymore just delete your account and all y
 
 Nadine not only wants to store her work todos, but also has a large list of TV-shows she still wants to watch! 
 With this todo App she can do both and thanks to the lists feature she won´t mix up those areas.
-Thanks to the Api features her movie-streaming service could set the todo as "done" if one of the movies from her 
+Thanks to the Api features her movie-streaming service could delete the todo if one of the movies from her 
 list was been watched by her. It would also be possible to add or remove movies from her list.
 
 Nadine works for a company that does not want company secrets to become public and therefore it is very important
